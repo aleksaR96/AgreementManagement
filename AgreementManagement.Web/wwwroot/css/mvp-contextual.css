@@ -1,0 +1,61 @@
+.text-mvp {
+    color: #62bb46;
+}
+
+.text-mvp-lighter {
+    color: #81c96b;
+}
+
+.text-mvp-light {
+    color: #d0ebc8;
+}
+
+.text-mvp-darker {
+    color: #458331;
+}
+
+.text-mvp-dark {
+    color: #14250e;
+}
+
+a.text-mvp:hover, a.text-mvp-light:hover, a.text-mvp-lighter:hover, button.text-mvp:hover, button.text-mvp-light:hover, button.text-mvp-lighter:hover {
+    color: #4e9638;
+}
+
+a.text-mvp-dark:hover, a.text-mvp-darker:hover, button.text-mvp-dark:hover, button.text-mvp-darker:hover {
+    color: #72c259;
+}
+
+.bg-mvp {
+    background-color: #62bb46;
+}
+
+.bg-mvp-lighter {
+    background-color: #81c96b;
+}
+
+.bg-mvp-light {
+    background-color: #d0ebc8;
+}
+
+.bg-mvp-darker {
+    background-color: #458331;
+}
+
+.bg-mvp-dark {
+    background-color: #14250e;
+}
+
+.bg-mvp-dark-transparent {
+    background-color: rgba(20, 37, 14, 0.3);
+}
+
+.bg-white-transparent {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.bg-img-mvp {
+    background-image: url("../hero-area.jpg");
+    background-size: cover;
+    background-position: center;
+}
