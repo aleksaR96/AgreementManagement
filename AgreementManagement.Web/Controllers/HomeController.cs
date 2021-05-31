@@ -1,4 +1,7 @@
-﻿using AgreementManagement.Web.Models;
+﻿using AgreementManagement.Web.Data;
+using AgreementManagement.Web.Data.Repository;
+using AgreementManagement.Web.Models;
+using AgreementManagement.Web.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,9 +15,18 @@ namespace AgreementManagement.Web.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+        private readonly IRepository<ProductGroup> _productGroupRepository;
+
+        public HomeController(IRepository<ProductGroup> productGroupRepository)
+        {
+            _productGroupRepository = productGroupRepository;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            ProductGroupService pgs = new ProductGroupService(_productGroupRepository);
+
+            return View(pgs.GetProductGroups());
         }
 
         [AllowAnonymous]

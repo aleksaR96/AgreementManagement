@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/AgreementManagement.Domain/obj
+/AgreementManagement.Service/bin/Debug
+/AgreementManagement.Service/obj
+/AgreementManagement.Web/bin/Debug/netcoreapp2.2/AgreementManagement.Service.dll
+/AgreementManagement.Web/bin/Debug/netcoreapp2.2/AgreementManagement.Service.pdb
