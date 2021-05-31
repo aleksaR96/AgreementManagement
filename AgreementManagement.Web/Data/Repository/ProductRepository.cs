@@ -5,19 +5,19 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public class ProductGroupRepository<T> : IRepository<T> where T : class
+    public class ProductRepository<T> : IRepository<T> where T : class
     {
         private readonly AgreementManagementContext _context;
         private readonly DbSet<T> _table;
         private bool disposed = false;
 
-        public ProductGroupRepository()
+        public ProductRepository()
         {
             _context = new AgreementManagementContext();
             _table = _context.Set<T>();
         }
 
-        public ProductGroupRepository(AgreementManagementContext context)
+        public ProductRepository(AgreementManagementContext context)
         {
             _context = context;
             _table = context.Set<T>();
@@ -28,25 +28,25 @@
             return _table.ToList();
         }
 
-        public T GetById(int productGroupID)
+        public T GetById(int productID)
         {
-            return _table.Find(productGroupID);
+            return _table.Find(productID);
         }
 
-        public void Insert(T productGroup)
+        public void Insert(T product)
         {
-            _table.Add(productGroup);
+            _table.Add(product);
         }
 
-        public void Update(T productGroup)
+        public void Update(T product)
         {
-            _context.Entry(productGroup).State = EntityState.Modified;
+            _context.Entry(product).State = EntityState.Modified;
         }
 
-        public void Delete(int productGroupID)
+        public void Delete(int productID)
         {
-            ProductGroup productGroup = _context.ProductGroup.Find(productGroupID);
-            _context.ProductGroup.Remove(productGroup);
+            Product product = _context.Product.Find(productID);
+            _context.Product.Remove(product);
         }
 
         public void Save()

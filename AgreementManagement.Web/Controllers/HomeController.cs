@@ -1,17 +1,17 @@
-﻿using AgreementManagement.Web.Data;
-using AgreementManagement.Web.Data.Repository;
-using AgreementManagement.Web.Models;
-using AgreementManagement.Web.Service;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace AgreementManagement.Web.Controllers
+﻿namespace AgreementManagement.Web.Controllers
 {
+    using AgreementManagement.Web.Data;
+    using AgreementManagement.Web.Data.Repository;
+    using AgreementManagement.Web.Models;
+    using AgreementManagement.Web.Service;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     [Authorize]
     public class HomeController : Controller
     {
@@ -24,9 +24,7 @@ namespace AgreementManagement.Web.Controllers
 
         public IActionResult Index()
         {
-            ProductGroupService pgs = new ProductGroupService(_productGroupRepository);
-
-            return View(pgs.GetProductGroups());
+            return View();
         }
 
         [AllowAnonymous]

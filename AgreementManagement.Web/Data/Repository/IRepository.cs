@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace AgreementManagement.Web.Data.Repository
+﻿namespace AgreementManagement.Web.Data.Repository
 {
+    using System.Collections.Generic;
+
     public interface IRepository<T>
     {
         IEnumerable<T> GetAll();

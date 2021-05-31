@@ -39,11 +39,16 @@ namespace AgreementManagement.Web
             services.AddDbContext<AgreementManagementContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped<IRepository<ProductGroup>, ProductGroupRepository<ProductGroup>>();
+            services.AddScoped<IRepository<Product>, ProductRepository<Product>>();
+            services.AddScoped<IRepository<Agreement>, AgreementRepository<Agreement>>();
+            services.AddScoped<IRepository<AspNetUsers>, AspNetUsersRepository<AspNetUsers>>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
