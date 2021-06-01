@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AgreementManagement.Web.Data.Repository;
+using AutoMapper;
+using AgreementManagement.Web.Service.Mapper;
 
 namespace AgreementManagement.Web
 {
@@ -45,10 +47,19 @@ namespace AgreementManagement.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddTransient<IEmailSender, EmailSender>();
+
             services.AddScoped<IRepository<ProductGroup>, ProductGroupRepository<ProductGroup>>();
             services.AddScoped<IRepository<Product>, ProductRepository<Product>>();
             services.AddScoped<IRepository<Agreement>, AgreementRepository<Agreement>>();
             services.AddScoped<IRepository<AspNetUsers>, AspNetUsersRepository<AspNetUsers>>();
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

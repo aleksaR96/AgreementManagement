@@ -77,5 +77,35 @@
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        public ICollection<Agreement> SortAgreements(string columnName, bool orderAscending = true)
+        {
+            IQueryable<Agreement> agreements = (IQueryable<Agreement>)_table.ToList();
+
+            switch (columnName)
+            {
+                case nameof(Agreement.EffectiveDate):
+                    agreements = orderAscending ?
+                        agreements.OrderBy(s => s.EffectiveDate).AsQueryable() : agreements.OrderByDescending(s => s.EffectiveDate).AsQueryable();
+                    break;
+                case nameof(Agreement.ExpirationDate):
+                    agreements = orderAscending ?
+                        agreements.OrderBy(s => s.ExpirationDate).AsQueryable() : agreements.OrderByDescending(s => s.ExpirationDate).AsQueryable();
+                    break;
+                case nameof(Agreement.ProductPrice):
+                    agreements = orderAscending ?
+                        agreements.OrderBy(s => s.ProductPrice).AsQueryable() : agreements.OrderByDescending(s => s.ProductPrice).AsQueryable();
+                    break;
+                case nameof(Agreement.NewPrice):
+                    agreements = orderAscending ?
+                        agreements.OrderBy(s => s.NewPrice).AsQueryable() : agreements.OrderByDescending(s => s.NewPrice).AsQueryable();
+                    break;
+                default:
+                    break;
+            }
+
+            var result = agreements.ToList();
+            return result;
+        }
     }
 }

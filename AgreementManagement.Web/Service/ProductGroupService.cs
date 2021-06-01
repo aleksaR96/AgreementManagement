@@ -2,25 +2,26 @@
 {
     using AgreementManagement.Web.Data;
     using AgreementManagement.Web.Data.Repository;
+    using AgreementManagement.Web.Service.DTO;
+    using AutoMapper;
     using System.Collections.Generic;
-    using System.Linq;
 
     public class ProductGroupService
     {
         private IRepository<ProductGroup> _productGroupRepository;
+        private IMapper _mapper;
 
-        public ProductGroupService(IRepository<ProductGroup> productGroupRepository)
+        public ProductGroupService(IRepository<ProductGroup> productGroupRepository, IMapper mapper)
         {
             _productGroupRepository = productGroupRepository;
+            _mapper = mapper;
         }
 
-        public List<ProductGroup> GetProductGroups()
+        public List<ProductGroupDTO> GetProducts()
         {
-            List<ProductGroup> productGroups = (List<ProductGroup>)_productGroupRepository.GetAll();
-            _productGroupRepository.Save();
-            _productGroupRepository.Dispose();
-
-            return productGroups;
+            List<ProductGroup> productGroupsList = (List<ProductGroup>)_productGroupRepository.GetAll();
+            List<ProductGroupDTO> dtoList = _mapper.Map<List<ProductGroupDTO>>(productGroupsList);
+            return dtoList;
         }
     }
 }

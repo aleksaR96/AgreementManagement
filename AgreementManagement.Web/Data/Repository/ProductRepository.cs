@@ -4,6 +4,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public class ProductRepository<T> : IRepository<T> where T : class
     {
@@ -76,6 +77,28 @@
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public ICollection<Product> SortProducts(string columnName, bool orderAscending = true)
+        {
+            IQueryable<Product> products = (IQueryable<Product>)_table.ToList();
+
+            switch (columnName)
+            {
+                case nameof(Product.ProductDescription):
+                    products = orderAscending ?
+                        products.OrderBy(s => s.ProductDescription).AsQueryable() : products.OrderByDescending(s => s.ProductDescription).AsQueryable();
+                    break;
+                case nameof(Product.Price):
+                    products = orderAscending ?
+                        products.OrderBy(s => s.Price).AsQueryable() : products.OrderByDescending(s => s.Price).AsQueryable();
+                    break;
+                default:
+                    break;
+            }
+
+            var result = products.ToList();
+            return result;
         }
     }
 }

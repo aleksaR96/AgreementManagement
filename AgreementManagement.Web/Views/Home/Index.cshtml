@@ -1,14 +1,26 @@
 ﻿@using AgreementManagement.Web.Data
 @model IEnumerable<ProductGroup>
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Agreement Manager";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    @foreach (var pg in Model)
-    {
-        <p>@pg.Id</p>
-    }
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p class="h2">@ViewData["Title"]</p>
+
+    <table id="table_id" class="display">
+        <thead>
+            <tr>
+                <th>Column name</th>
+            </tr>
+        </thead>
+    </table>
+
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#table_id').DataTable({
+            //ajax: '/Home/Agreements'
+        });
+    });
+</script>
