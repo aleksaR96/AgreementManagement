@@ -1,19 +1,58 @@
-﻿@using AgreementManagement.Web.Data
-@model IEnumerable<ProductGroup>
+﻿@using AgreementManagement.Web.Models.Home
+@using System.Reflection 
+@model IEnumerable<AgreementTableModel>
 @{
-    ViewData["Title"] = "Agreement Manager";
+    ViewData["Title"] = "Manager";
+    Type listType = typeof(AgreementTableModel);
+    PropertyInfo[] typeProperties = listType.GetProperties();
 }
 
-<div class="text-center">
-    <p class="h2">@ViewData["Title"]</p>
+<div class="container-fluid bg-white-transparent p-3">
 
-    <table id="table_id" class="display">
-        <thead>
-            <tr>
-                <th>Column name</th>
-            </tr>
-        </thead>
-    </table>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link text-dark active" data-toggle="collapse" href="#agreementCard"><i class='far fa-file-alt'></i> Agreements</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" data-toggle="collapse" href="#productsCard">Products</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" data-toggle="collapse" href="#productGroupsCard">Product Groups</a>
+        </li>
+    </ul>
+
+    <div id="accordion">
+        <div class="card">
+            <div id="agreementCard" class="collapse show" data-parent="#accordion">
+                <div class="card-body">
+                    <p class="h2">Agreement Manager</p>
+
+                    <table id="table_id" class="display bg-light">
+                        <thead>
+                            <tr>
+                                @foreach (var property in typeProperties)
+                                {
+                                    <th>@property.Name</th>
+                                }
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+            <div id="productsCard" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    Lorem ipsum..
+                </div>
+            </div>
+
+            <div id="productGroupsCard" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    Lorem ipsum..
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 

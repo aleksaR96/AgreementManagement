@@ -1,12 +1,15 @@
 ﻿namespace AgreementManagement.Web.Controllers
 {
+    using AgreementManagement.Web.Controllers.Helpers;
     using AgreementManagement.Web.Data;
     using AgreementManagement.Web.Data.Repository;
     using AgreementManagement.Web.Models;
+    using AgreementManagement.Web.Models.Home;
     using AgreementManagement.Web.Service;
     using AutoMapper;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using System.Collections.Generic;
     using System.Diagnostics;
 
     [Authorize]
@@ -17,6 +20,7 @@
         private readonly IRepository<Agreement> _agreementRepository;
         private readonly IRepository<AspNetUsers> _aspNetUsersRepository;
         private readonly IMapper _mapper;
+        private HomeHelper _helper;
 
         public HomeController(
             IRepository<ProductGroup> productGroupRepository,
@@ -30,19 +34,25 @@
             _agreementRepository = agreementRepository;
             _aspNetUsersRepository = aspNetUsersRepository;
             _mapper = mapper;
+            _helper = new HomeHelper(
+                productGroupRepository,
+                productRepository,
+                agreementRepository,
+                aspNetUsersRepository,
+                mapper);
         }
 
         public IActionResult Index()
         {
-            var agrService = new AgreementService(_agreementRepository, _mapper);
-            var list = agrService.GetAgreements();
-            return View();
+            //List<AgreementTableModel> model = _helper.PrepareAgreementTableModel();
+            return View(new List<AgreementTableModel>());
         }
 
         [HttpGet]
         public JsonResult Agreements()
         {
-            return Json(new Agreement());
+            List<AgreementTableModel> list = _helper.PrepareAgreementTableModel();
+            return Json(list);
         }
 
         [AllowAnonymous]
