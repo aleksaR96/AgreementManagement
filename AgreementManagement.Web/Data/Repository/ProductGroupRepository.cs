@@ -17,6 +17,12 @@
             _table = _context.Set<T>();
         }
 
+        public ProductGroupRepository(DbSet<T> table)
+        {
+            _context = new AgreementManagementContext();
+            _table = table;
+        }
+
         public ProductGroupRepository(AgreementManagementContext context)
         {
             _context = context;
@@ -40,7 +46,7 @@
 
         public void Update(T productGroup)
         {
-            _context.Entry(productGroup).State = EntityState.Modified;
+            _context.Update(productGroup);
         }
 
         public void Delete(int productGroupID)

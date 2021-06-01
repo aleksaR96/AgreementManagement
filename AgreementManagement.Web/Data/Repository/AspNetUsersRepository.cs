@@ -18,16 +18,16 @@
             _table = _context.Set<T>();
         }
 
+        public AspNetUsersRepository(DbSet<T> table)
+        {
+            _context = new AgreementManagementContext();
+            _table = table;
+        }
+
         public AspNetUsersRepository(AgreementManagementContext context)
         {
             _context = context;
             _table = context.Set<T>();
-        }
-
-        public void Delete(int id)
-        {
-            AspNetUsers user = _context.AspNetUsers.Find(id);
-            _context.AspNetUsers.Remove(user);
         }
 
         public IEnumerable<T> GetAll()
@@ -36,6 +36,11 @@
         }
 
         public T GetById(int id)
+        {
+            return _table.Find(id);
+        }
+
+        public T GetById(string id)
         {
             return _table.Find(id);
         }
@@ -52,7 +57,7 @@
 
         public void Update(T obj)
         {
-            _context.Entry(obj).State = EntityState.Modified;
+            _context.Update(obj);
         }
 
         protected virtual void Dispose(bool disposing)
@@ -71,6 +76,11 @@
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

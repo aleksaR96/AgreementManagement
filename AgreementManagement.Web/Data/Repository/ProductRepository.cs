@@ -17,6 +17,12 @@
             _table = _context.Set<T>();
         }
 
+        public ProductRepository(DbSet<T> table)
+        {
+            _context = new AgreementManagementContext();
+            _table = table;
+        }
+
         public ProductRepository(AgreementManagementContext context)
         {
             _context = context;
@@ -40,7 +46,7 @@
 
         public void Update(T product)
         {
-            _context.Entry(product).State = EntityState.Modified;
+            _context.Update(product);
         }
 
         public void Delete(int productID)

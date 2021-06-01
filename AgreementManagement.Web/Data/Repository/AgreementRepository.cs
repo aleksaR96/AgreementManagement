@@ -17,6 +17,12 @@
             _table = _context.Set<T>();
         }
 
+        public AgreementRepository(DbSet<T> table)
+        {
+            _context = new AgreementManagementContext();
+            _table = table;
+        }
+
         public AgreementRepository(AgreementManagementContext context)
         {
             _context = context;
@@ -51,7 +57,7 @@
 
         public void Update(T obj)
         {
-            _context.Entry(obj).State = EntityState.Modified;
+            _context.Update(obj);
         }
 
         protected virtual void Dispose(bool disposing)

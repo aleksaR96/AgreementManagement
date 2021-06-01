@@ -7,3 +7,9 @@
 /AgreementManagement.Service/obj
 /AgreementManagement.Web/bin/Debug/netcoreapp2.2/AgreementManagement.Service.dll
 /AgreementManagement.Web/bin/Debug/netcoreapp2.2/AgreementManagement.Service.pdb
+/AgreementManagement.Test/bin/Debug/netcoreapp3.1
+/AgreementManagement.Test/obj/Debug/netcoreapp3.1
+/AgreementManagement.Test/obj
+/AgreementManagement.Web/bin/Debug/netcoreapp2.2
+/.vs/AgreementManagement/v16/TestStore/0/000.testlog
+/.vs/AgreementManagement/v16/TestStore/0/testlog.manifest
