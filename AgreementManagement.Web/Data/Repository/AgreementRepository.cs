@@ -45,6 +45,11 @@
             return _table.Find(id);
         }
 
+        public T GetById(string id)
+        {
+            return _table.Find(id);
+        }
+
         public void Insert(T obj)
         {
             _table.Add(obj);

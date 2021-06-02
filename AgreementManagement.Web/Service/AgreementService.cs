@@ -2,9 +2,12 @@
 {
     using AgreementManagement.Web.Data;
     using AgreementManagement.Web.Data.Repository;
+    using AgreementManagement.Web.Models.Home;
     using AgreementManagement.Web.Service.DTO;
     using AutoMapper;
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class AgreementService
     {
@@ -22,6 +25,38 @@
             List<Agreement> agreementList = (List<Agreement>)_agreementRepository.GetAll();
             List<AgreementDTO> dtoList = _mapper.Map<List<AgreementDTO>>(agreementList);
             return dtoList;
+        }
+
+        public void AddAgreementFromForm(
+            AgreementModel agreement,
+            IRepository<AspNetUsers> usersRepository,
+            IRepository<Product> productRepository,
+            IRepository<Agreement> agreementRepository)
+        {
+            try
+            {
+                AspNetUsers user = usersRepository.GetAll().FirstOrDefault(u => u.UserName == agreement.UserName);
+                Product product = productRepository.GetById(agreement.ProductId);
+
+                Agreement newAgreement = new Agreement
+                {
+                    UserId = user.Id,
+                    ProductGroupId = agreement.ProductGroupId,
+                    ProductId = agreement.ProductId,
+                    EffectiveDate = agreement.EffectiveDate,
+                    ExpirationDate = agreement.ExpirationDate,
+                    ProductPrice = product.Price,
+                    NewPrice = agreement.NewPrice
+                };
+
+                agreementRepository.Insert(newAgreement);
+                agreementRepository.Save();
+                agreementRepository.Dispose();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

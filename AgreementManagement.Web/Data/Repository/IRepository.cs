@@ -6,6 +6,7 @@
     {
         IEnumerable<T> GetAll();
         T GetById(int id);
+        T GetById(string id);
         void Insert(T obj);
         void Update(T obj);
         void Delete(int id);

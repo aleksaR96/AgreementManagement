@@ -4,7 +4,6 @@
     using AgreementManagement.Web.Data.Repository;
     using AgreementManagement.Web.Service.DTO;
     using AutoMapper;
-    using System.Collections.Generic;
 
     public class UserService
     {
@@ -17,11 +16,11 @@
             _mapper = mapper;
         }
 
-        public List<AspNetUsersDTO> GetAgreements()
+        public AspNetUsersDTO GetUser(string id)
         {
-            List<AspNetUsers> usersList = (List<AspNetUsers>)_aspNetUsersRepository.GetAll();
-            List<AspNetUsersDTO> dtoList = _mapper.Map<List<AspNetUsersDTO>>(usersList);
-            return dtoList;
+            AspNetUsers user = _aspNetUsersRepository.GetById(id);
+            AspNetUsersDTO dtoUser = _mapper.Map<AspNetUsersDTO>(user);
+            return dtoUser;
         }
     }
 }

@@ -15,14 +15,14 @@
                     <i class='far fa-user-circle'></i> User
                 </a>
                 <div class="dropdown-menu dropdown-menu-left">
-                    <a class="dropdown-item" id="profile" asp-area="Identity" asp-page="/Account/Manage/Index">Profile</a>
-                    <a class="dropdown-item" id="change-password" asp-area="Identity" asp-page="/Account/Manage/ChangePassword">Password</a>
+                    <a class="dropdown-item small px-3" id="profile" asp-area="Identity" asp-page="/Account/Manage/Index">Profile</a>
+                    <a class="dropdown-item small px-3" id="change-password" asp-area="Identity" asp-page="/Account/Manage/ChangePassword">Password</a>
                     @if (hasExternalLogins)
                     {
-                        <a id="external-login" class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/ExternalLogins">External logins</a>
+                        <a id="external-login" class="dropdown-item small px-3" asp-area="Identity" asp-page="/Account/Manage/ExternalLogins">External logins</a>
                     }
-                    <a class="dropdown-item" id="two-factor" asp-area="Identity" asp-page="/Account/Manage/TwoFactorAuthentication">Two-factor authentication</a>
-                    <a class="dropdown-item" id="personal-data" asp-area="Identity" asp-page="/Account/Manage/PersonalData">Personal data</a>
+                    <a class="dropdown-item small px-3" id="two-factor" asp-area="Identity" asp-page="/Account/Manage/TwoFactorAuthentication">Two-factor authentication</a>
+                    <a class="dropdown-item small px-3" id="personal-data" asp-area="Identity" asp-page="/Account/Manage/PersonalData">Personal data</a>
                 </div>
             </div>
         </li>

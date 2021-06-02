@@ -17,11 +17,18 @@
             _mapper = mapper;
         }
 
-        public List<ProductGroupDTO> GetProducts()
+        public List<ProductGroupDTO> GetProductGroups()
         {
             List<ProductGroup> productGroupsList = (List<ProductGroup>)_productGroupRepository.GetAll();
             List<ProductGroupDTO> dtoList = _mapper.Map<List<ProductGroupDTO>>(productGroupsList);
             return dtoList;
+        }
+
+        public ProductGroupDTO GetProductGroup(int id)
+        {
+            ProductGroup productGroup = _productGroupRepository.GetById(id);
+            ProductGroupDTO dtoGroup = _mapper.Map<ProductGroupDTO>(productGroup);
+            return dtoGroup;
         }
     }
 }

@@ -40,6 +40,11 @@
             return _table.Find(productID);
         }
 
+        public T GetById(string productID)
+        {
+            return _table.Find(productID);
+        }
+
         public void Insert(T product)
         {
             _table.Add(product);

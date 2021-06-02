@@ -23,5 +23,12 @@
             List<ProductDTO> dtoList = _mapper.Map<List<ProductDTO>>(productList);
             return dtoList;
         }
+
+        public ProductDTO GetProduct(int id)
+        {
+            Product product = _productRepository.GetById(id);
+            ProductDTO dtoProduct = _mapper.Map<ProductDTO>(product);
+            return dtoProduct;
+        }
     }
 }

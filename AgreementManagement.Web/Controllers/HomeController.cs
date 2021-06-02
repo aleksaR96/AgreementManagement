@@ -44,15 +44,34 @@
 
         public IActionResult Index()
         {
-            //List<AgreementTableModel> model = _helper.PrepareAgreementTableModel();
-            return View(new List<AgreementTableModel>());
+            return View(_helper.PrepareAgreementManagerModel());
         }
 
         [HttpGet]
-        public JsonResult Agreements()
+        public JsonResult AgreementTable()
         {
             List<AgreementTableModel> list = _helper.PrepareAgreementTableModel();
-            return Json(list);
+            return Json(new { data = list });
+        }
+
+        [HttpPost]
+        public IActionResult AddAgreement(AgreementModel agreement)
+        {
+            new AgreementService(_agreementRepository, _mapper)
+                .AddAgreementFromForm(agreement, _aspNetUsersRepository, _productRepository, _agreementRepository);
+            return Ok();
+        }
+
+        [HttpGet]
+        public IActionResult Agreement(AgreementModel agreement)
+        {
+            if (agreement?.Id == null)
+            {
+                return Json(agreement);
+            }
+
+            //get agreement
+            return Json(agreement);
         }
 
         [AllowAnonymous]

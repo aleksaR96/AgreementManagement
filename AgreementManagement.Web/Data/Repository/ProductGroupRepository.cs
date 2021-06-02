@@ -40,6 +40,11 @@
             return _table.Find(productGroupID);
         }
 
+        public T GetById(string productGroupID)
+        {
+            return _table.Find(productGroupID);
+        }
+
         public void Insert(T productGroup)
         {
             _table.Add(productGroup);

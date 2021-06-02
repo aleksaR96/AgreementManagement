@@ -4,8 +4,9 @@
 
     public class AgreementTableModel
     {
+        public int Id { get; set; }
         public string UserName { get; set; }
-        public string ProductGroupCode { get; set; }
+        public int ProductGroupCode { get; set; }
         public string ProductGroupDescription { get; set; }
         public string ProductNumber { get; set; }
         public string ProductDescription { get; set; }
