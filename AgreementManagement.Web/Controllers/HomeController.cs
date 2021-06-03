@@ -57,22 +57,39 @@
         [HttpPost]
         public IActionResult AddAgreement(AgreementModel agreement)
         {
-            new AgreementService(_agreementRepository, _mapper)
+            if (ModelState.IsValid)
+            {
+                new AgreementService(_agreementRepository, _mapper)
                 .AddAgreementFromForm(agreement, _aspNetUsersRepository, _productRepository, _agreementRepository);
+                return Ok();
+            }
+
+            IEnumerable<ModelError> modelErrors = ModelState.AllErrors();
+            return BadRequest(modelErrors);
+        }
+
+        [HttpPut]
+        public IActionResult EditAgreement(AgreementModel agreement)
+        {
+            if (ModelState.IsValid)
+            {
+                new AgreementService(_agreementRepository, _mapper)
+                .EditAgreementFromForm(agreement, _aspNetUsersRepository, _productRepository, _agreementRepository);
+                return Ok();
+            }
+
+            IEnumerable<ModelError> modelErrors = ModelState.AllErrors();
+            return BadRequest(modelErrors);
+        }
+
+        [HttpDelete]
+        public IActionResult RemoveAgreement(int id)
+        {
+            AgreementService service = new AgreementService(_agreementRepository, _mapper);
+            service.RemoveAgreement(id);
             return Ok();
         }
 
-        [HttpGet]
-        public IActionResult Agreement(AgreementModel agreement)
-        {
-            if (agreement?.Id == null)
-            {
-                return Json(agreement);
-            }
-
-            //get agreement
-            return Json(agreement);
-        }
 
         [AllowAnonymous]
         public IActionResult Privacy()

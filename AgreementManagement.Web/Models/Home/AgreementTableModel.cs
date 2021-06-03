@@ -6,6 +6,7 @@
     {
         public int Id { get; set; }
         public string UserName { get; set; }
+        public int ProductId { get; set; }
         public int ProductGroupCode { get; set; }
         public string ProductGroupDescription { get; set; }
         public string ProductNumber { get; set; }

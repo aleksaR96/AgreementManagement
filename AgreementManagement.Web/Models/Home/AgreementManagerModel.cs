@@ -7,6 +7,5 @@
     {
         public List<ProductGroupDTO> ProductGroupList { get; set; }
         public List<ProductDTO> ProductList { get; set; }
-        public AgreementModel AgreementModel { get; set; }
     }
 }

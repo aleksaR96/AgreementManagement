@@ -58,5 +58,45 @@
                 throw;
             }
         }
+
+        public void EditAgreementFromForm(
+            AgreementModel agreement,
+            IRepository<AspNetUsers> usersRepository,
+            IRepository<Product> productRepository,
+            IRepository<Agreement> agreementRepository)
+        {
+            try
+            {
+                AspNetUsers user = usersRepository.GetAll().FirstOrDefault(u => u.UserName == agreement.UserName);
+                Product product = productRepository.GetById(agreement.ProductId);
+
+                Agreement newAgreement = new Agreement
+                {
+                    Id = (int)agreement.Id,
+                    UserId = user.Id,
+                    ProductGroupId = agreement.ProductGroupId,
+                    ProductId = agreement.ProductId,
+                    EffectiveDate = agreement.EffectiveDate,
+                    ExpirationDate = agreement.ExpirationDate,
+                    ProductPrice = product.Price,
+                    NewPrice = agreement.NewPrice
+                };
+
+                agreementRepository.Update(newAgreement);
+                agreementRepository.Save();
+                agreementRepository.Dispose();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void RemoveAgreement(int id)
+        {
+            _agreementRepository.Delete(id);
+            _agreementRepository.Save();
+            _agreementRepository.Dispose();
+        }
     }
 }

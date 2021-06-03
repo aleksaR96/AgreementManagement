@@ -58,3 +58,16 @@ body {
 .dropdown-toggle:hover {
     cursor: pointer;
 }
+
+select.is-invalid {
+    background-image: none!important;
+}
+
+.custom-invalid-tooltip {
+    position: absolute;
+    top: calc(100% - 1px);
+    background-color: #dc3545 !important;
+    color: white;
+    font-size: .8rem;
+    padding: 0 .3em;
+}

@@ -69,6 +69,7 @@
                     ProductGroupDescription = productGroup.GroupDescription,
                     ProductNumber = product.ProductNumber,
                     ProductDescription = product.ProductDescription,
+                    ProductId = product.Id,
                     EffectiveDate = item.EffectiveDate,
                     ExpirationDate = item.ExpirationDate,
                     ProductPrice = item.ProductPrice,
