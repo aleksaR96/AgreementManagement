@@ -1,0 +1,54 @@
+﻿@using AgreementManagement.Web.Models.Home
+@model AgreementManagerModel
+
+<div id="accordion">
+    <div class="card">
+        <div id="agreementCard" class="collapse show" data-parent="#accordion">
+            <div class="card-header">
+                <p class="h2 mb-3">Manager <span class="small text-muted">| Agreements</span></p>
+                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#NewAgreementModal"><i class='far fa-plus-square'></i> New Agreement</button>
+            </div>
+            <div class="card-body table-responsive">
+
+                <table id="agreementTable" class="nowrap table table-sm table-striped table-bordered bg-light">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Product Group Code</th>
+                            <th>Product Number</th>
+                            <th>Effective Date</th>
+                            <th>Expiration Date</th>
+                            <th>Product Price</th>
+                            <th>New Price</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Username</th>
+                            <th>Product Group Code</th>
+                            <th>Product Number</th>
+                            <th>Effective Date</th>
+                            <th>Expiration Date</th>
+                            <th>Product Price</th>
+                            <th>New Price</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <div id="productsCard" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+                Lorem ipsum..
+            </div>
+        </div>
+
+        <div id="productGroupsCard" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+                Lorem ipsum..
+            </div>
+        </div>
+    </div>
+</div>

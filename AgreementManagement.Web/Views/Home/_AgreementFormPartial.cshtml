@@ -1,0 +1,79 @@
+﻿@using AgreementManagement.Web.Models.Home
+@model AgreementManagerModel
+
+<div class="modal fade" id="NewAgreementModal" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <p class="modal-title h6">Agreement</p>
+            </div>
+
+            <div class="modal-body">
+                <form id="NewAgreementModalForm" method="post">
+
+                    <div class="row">
+                        <div class="col border-right">
+                            <div class="form-group position-relative">
+                                <label for="productGroup">Group:</label>
+                                <select class="form-control form-control-sm" id="productGroup" name="ProductGroupId">
+                                    <option value=""> </option>
+                                    @foreach (var group in Model.ProductGroupList)
+                                    {
+                                        <option value="@group.Id">@group.GroupDescription</option>
+                                    }
+                                </select>
+                                <div id="ProductGroupIdValidationMessage"></div>
+                            </div>
+                            <div class="form-group position-relative">
+                                <label for="product">Product:</label>
+                                <select class="form-control form-control-sm" id="product" name="ProductId">
+                                    <option value=""> </option>
+                                    @foreach (var product in Model.ProductList)
+                                    {
+                                        <option value="@product.Id">@product.ProductDescription</option>
+                                    }
+                                </select>
+                                <div id="ProductIdValidationMessage"></div>
+                            </div>
+
+                            <label for="newPrice">New Price:</label>
+                            <div class="input-group mb-3 position-relative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class='fas fa-dollar-sign'></i></span>
+                                </div>
+                                <input type="number" class="form-control form-control-sm w-50" id="newPrice" name="NewPrice" value="0">
+                                <div id="NewPriceValidationMessage"></div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group position-relative">
+                                <label for="effectiveDate">Effective Date:</label>
+                                <input type="date" class="form-control form-control-sm" id="effectiveDate" name="EffectiveDate">
+                                <div id="EffectiveDateValidationMessage"></div>
+                            </div>
+                            <div class="form-group position-relative">
+                                <label for="expirationDate">Expiration Date:</label>
+                                <input type="date" class="form-control form-control-sm" id="expirationDate" name="ExpirationDate">
+                                <div id="ExpirationDateValidationMessage"></div>
+                            </div>
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" id="activeCheckBox" name="Active">
+                                <label class="custom-control-label" for="activeCheckBox">Active</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="float-right">
+                        <button class="btn btn-sm btn-primary" id="NewAgreementSaveBtn">Save</button>
+                        <button class="btn btn-sm btn-outline-light text-dark" data-dismiss="modal" id="NewAgreementModalCloseBtn"><i class='far fa-trash-alt'></i> Discard</button>
+                    </div>
+
+                    <input type="hidden" name="UserName" value="@User.Identity.Name" />
+                    <input id="hiddenAgreementId" type="hidden" name="Id" value="" />
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
