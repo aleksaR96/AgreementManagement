@@ -1,12 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using NLog.Extensions.Logging;
 
 namespace AgreementManagement.Web
 {
@@ -19,12 +14,12 @@ namespace AgreementManagement.Web
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-            .ConfigureLogging(logBuilder =>
-            {
-                logBuilder.ClearProviders();
-                logBuilder.AddConsole();
-                logBuilder.AddTraceSource("Information, ActivityTracing");
-            })
+            .ConfigureLogging((hostingContext, logging) =>
+                {
+                    logging.ClearProviders();
+                    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                    logging.AddNLog();
+                })
             .UseStartup<Startup>();
     }
 }

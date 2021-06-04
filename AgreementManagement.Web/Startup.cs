@@ -1,5 +1,8 @@
-﻿using AgreementManagement.Web.Service;
-using AgreementManagement.Web.Data;
+﻿using AgreementManagement.Web.Data;
+using AgreementManagement.Web.Data.Repository;
+using AgreementManagement.Web.Service;
+using AgreementManagement.Web.Service.Mapper;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,12 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using AgreementManagement.Web.Data.Repository;
-using AutoMapper;
-using AgreementManagement.Web.Service.Mapper;
-using System.IO;
-using Microsoft.Extensions.Logging;
-using System;
 
 namespace AgreementManagement.Web
 {
@@ -68,10 +65,8 @@ namespace AgreementManagement.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            loggerFactory.AddFile($"{Directory.GetCurrentDirectory()}\\Logs\\Log.txt");
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
