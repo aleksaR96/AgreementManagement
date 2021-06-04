@@ -19,6 +19,12 @@ namespace AgreementManagement.Web
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            .ConfigureLogging(logBuilder =>
+            {
+                logBuilder.ClearProviders();
+                logBuilder.AddConsole();
+                logBuilder.AddTraceSource("Information, ActivityTracing");
+            })
+            .UseStartup<Startup>();
     }
 }

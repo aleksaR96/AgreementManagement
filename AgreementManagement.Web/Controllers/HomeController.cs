@@ -9,6 +9,7 @@
     using AutoMapper;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
     using System.Collections.Generic;
     using System.Diagnostics;
 
@@ -21,25 +22,29 @@
         private readonly IRepository<AspNetUsers> _aspNetUsersRepository;
         private readonly IMapper _mapper;
         private HomeHelper _helper;
+        private ILogger _logger;
 
         public HomeController(
             IRepository<ProductGroup> productGroupRepository,
             IRepository<Product> productRepository,
             IRepository<Agreement> agreementRepository,
             IRepository<AspNetUsers> aspNetUsersRepository,
-            IMapper mapper)
+            IMapper mapper,
+            ILogger<HomeController> logger)
         {
             _productGroupRepository = productGroupRepository;
             _productRepository = productRepository;
             _agreementRepository = agreementRepository;
             _aspNetUsersRepository = aspNetUsersRepository;
             _mapper = mapper;
+            _logger = logger;
             _helper = new HomeHelper(
                 productGroupRepository,
                 productRepository,
                 agreementRepository,
                 aspNetUsersRepository,
-                mapper);
+                mapper,
+                logger);
         }
 
         public IActionResult Index()
@@ -59,7 +64,7 @@
         {
             if (ModelState.IsValid)
             {
-                new AgreementService(_agreementRepository, _mapper)
+                new AgreementService(_agreementRepository, _mapper, _logger)
                 .AddAgreementFromForm(agreement, _aspNetUsersRepository, _productRepository, _agreementRepository);
                 return Ok();
             }
@@ -73,7 +78,7 @@
         {
             if (ModelState.IsValid)
             {
-                new AgreementService(_agreementRepository, _mapper)
+                new AgreementService(_agreementRepository, _mapper, _logger)
                 .EditAgreementFromForm(agreement, _aspNetUsersRepository, _productRepository, _agreementRepository);
                 return Ok();
             }
@@ -85,7 +90,7 @@
         [HttpDelete]
         public IActionResult RemoveAgreement(int id)
         {
-            AgreementService service = new AgreementService(_agreementRepository, _mapper);
+            AgreementService service = new AgreementService(_agreementRepository, _mapper, _logger);
             service.RemoveAgreement(id);
             return Ok();
         }
